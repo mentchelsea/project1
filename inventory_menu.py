@@ -1,7 +1,10 @@
 
-
+import database, purchase
+import menu
+database.databaseCreate()
+database.tablesCreate()
 while True:
-    purchases.clrscreen()
+    purchase.clrscreen()
     print("****** INVENTORY MANAGEMENT SYSTEM ****** \n")
     print("+++++++++++++++++++++++++++++++++++++++++")
     print("1. Purchase")

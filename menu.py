@@ -2,7 +2,7 @@ import inventory, sales, purchase
 
 def menuPurchases():
     while True:
-        purchases.clrscreen()
+        purchase.clrscreen()
         print("****** PURCHASE MANAGEMENT SYSTEM ******\n")
         print("++++++++++++++++++++++++++++++++++++++++++")
         print("1. Add purchase")
@@ -14,13 +14,13 @@ def menuPurchases():
         
         choice = int(input("Make a choice between 1 and 5: "))
         if choice == 1:
-            purchases.insertItem()
+            purchase.insertItem()
         elif choice == 2:
-            purchases.searchItem()
+            purchase.searchItem()
         elif choice == 3:
-            purchases.deleteItem()
+            purchase.deleteItem()
         elif choice == 4:
-            purchases.updateItem()
+            purchase.updateItem()
         elif choice == 5:
             return
         else:
@@ -29,7 +29,7 @@ def menuPurchases():
            
 def menuSales():
     while True:
-        purchases.clrscrean()
+        purchase.clrscrean()
         print("****** SALES MANAGEMENT SYSTEM ****** \n")
         print("+++++++++++++++++++++++++++++++++++++++++")
         print("1. Add sales ")
@@ -55,7 +55,7 @@ def menuSales():
             x = input("Press any key to continue: ")
 def menuInventory():
     while True:
-        purchases.clrscrean()
+        purchase.clrscrean()
         print("****** INVENTORY MANAGEMENT SYSTEM ****** \n")
         print("+++++++++++++++++++++++++++++++++++++++++")
         print("1. Search for inventory ")
