@@ -1,4 +1,4 @@
-import inventory
+import inventory, sales, purchase
 
 def menuPurchases():
     while True:
