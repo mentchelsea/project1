@@ -1,4 +1,4 @@
-
+#PURCHASES MODULE: 
 import mysql.connector
 from mysql.connector import errorcode
 from datetime import date, datetime, timedelta

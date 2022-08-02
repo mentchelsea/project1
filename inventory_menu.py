@@ -1,4 +1,9 @@
 
+#++++++++++++++++++++++++++++++++++++
+# Product inventory management system
+# Mengistu
+#++++++++++++++++++++++++++++++++++++
+#INVENTORY MANAGEMENT MODULE: 
 import database, purchase
 import menu
 database.databaseCreate()

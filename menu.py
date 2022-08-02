@@ -1,3 +1,4 @@
+#MENU MODULE: 
 import inventory, sales, purchase
 
 def menuPurchases():
