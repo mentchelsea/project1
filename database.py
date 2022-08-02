@@ -2,7 +2,7 @@
 import mysql.connector
 
 def databaseCreate():
-    cxn = mysql.connector.connect(user="root", password="", host="localhost")
+    cxn = mysql.connector.connect(user="root", password="******", host="localhost")
     cursor = cxn.cursor()
     cursor.execute("CREATE DATABASE IF NOT EXISTS Inventory")
     cursor.execute()

@@ -1,3 +1,4 @@
+import inventory
 
 def menuPurchases():
     while True:
