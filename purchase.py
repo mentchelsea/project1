@@ -5,16 +5,17 @@ from datetime import date, datetime, timedelta
 from mysql.connector import connection
 import os
 import platform
-
+import mysql_config as c
+import database
 
 def clrscreen():
     if platform.system() == "Windows":
         print(os.system("cls"))
 
 
-def insertData():
+def insertItem():
     try:
-        cxn = mysql.connector.connect(user="root", password="*****", host='localhost', database='Inventory')
+        cxn = mysql.connector.connect(user=c.user, password=c.password, host=c.host, database='Inventory')
         cursor = cxn.cursor()
         ProductCode = input("Enter product code : ")
         ProductName = input("Enter product name : ")
@@ -45,9 +46,9 @@ def insertData():
     cxn.close()
 
 
-def deleteData():
+def deleteItem():
     try:
-        cxn = mysql.connector.connect(user="root", password="***", host="localhost", database="Inventory")
+        cxn = mysql.connector.connect(user=c.user, password=c.password, host=c.host, database="Inventory")
         cursor = cxn.cursor()
         ProductCode = input("Enter product code to be deleted from the Purchases : ")
         Query = ("DELETE FROM Purchases WHERE ProductCode = %s")
@@ -67,13 +68,13 @@ def deleteData():
     cxn.close()
 
 
-def searchData():
+def searchItem():
     try:
-        cxn = mysql.connector.connect(user="root", password="123", host="localhost", database="Inventory")
+        cxn = mysql.connector.connect(user=c.user, password=c.password, host=c.host, database="Inventory")
         cursor = cxn.cursor()
         ProductCode = input("Enter Product Code to be searched from the Purchases : ")
         query = ("SELECT * FROM Purchases WHERE ProductCode = %s ")
-        rec_search = (ProductCode)
+        rec_search = (ProductCode) #####!!!!!!!
         cursor.execute(query, rec_search)
         search_count = 0
         for(ProductCode, ProductName, PurchaseDate, PurchasePrice, ProductStock) in cursor:
@@ -84,7 +85,7 @@ def searchData():
             print("Purchased on : ", PurchaseDate)
             print("Price of Product : ", PurchasePrice)
             print("Product in Stock : ", ProductStock)
-            print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
             if search_count%2 == 0:
                 input("Press any key continue")
                 clrscreen()
@@ -102,9 +103,9 @@ def searchData():
         cxn.close()
 
 
-def updateData():
+def updateItem():
     try:
-        cxn = mysql.connector.connect(user='root', password='123', host='localhost', database='Inventory')
+        cxn = mysql.connector.connect(user=c.user, password=c.password, host=c.host, database="Inventory")
         cursor = cxn.cursor()
         ProductCode = input("Enter Product Code to be updated from the Purchases : ")
         query = ("SELECT * FROM Purchases WHERE ProductCode = %s ")

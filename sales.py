@@ -4,15 +4,17 @@ from mysql.connector import errorcode
 from datetime import date, datetime, timedelta
 from mysql.connector import connection
 import os
+import mysql_config as c
 
 
 def clrscreen():
     print('\n' * 5)
 
 
-def insertData():
+def insertItem():
     try:
-        cxn = mysql.connector.connect(user="root", password="123", host="localhost", database="Inventory")
+
+        cxn = mysql.connector.connect(user=c.user, password=c.password, host=c.host, database="Inventory")
         cursor = cxn.cursor()
         ProductCode = input("Enter Product Code : ")
         ProductName = input("Enter Product Name : ")
@@ -39,14 +41,15 @@ def insertData():
         cxn.close()
 
 
-def deleteData():
+def deleteItem():
     try:
-        cxn = mysql.connector.connect(user="root", password="*****", host="localhost", database="Inventory")
+        cxn = mysql.connector.connect(user=c.user, password=c.password, host=c.host, database="Inventory")
         cursor = cxn.cursor()
-        ProductCode = input("Enter Product Code to be deleted from the Sales : ")
-        Query =("""DELETE FROM Sales WHERE ProductCode = %s""")
-        del_search = (ProductCode)
-        cursor.execute(Query, del_search)
+        ProductCode = int(input("Enter Product Code to be deleted from the Sales : "))
+        Query =(f"DELETE FROM Sales WHERE ProductCode = {ProductCode}")
+        # del_search = (ProductCode)
+ 
+        cursor.execute(Query)
         cxn.commit()
         cursor.close()
         cxn.close()
@@ -61,27 +64,30 @@ def deleteData():
         cxn.close()
 
 
-def searchData():
+def searchItem():
     try:
-        cxn = mysql.connector.connect(user="root", password="*****", host="localhost", database="Inventory")
+        cxn = mysql.connector.connect(user=c.user, password=c.password, host=c.host, database="Inventory")
         cursor = cxn.cursor()
-        ProductCode = input("Enter Product Code to be searched from the Sales : ")
-        query = ("SELECT * FROM Sales where ProductCode = %s")
-        rec_search = (ProductCode)
-        cursor.execute(query, rec_search)
+        ProductCode = int(input("Enter Product Code to be searched from the Sales : "))
+        query = (f"SELECT * FROM Sales where ProductCode = {ProductCode}")
+        # rec_search = (ProductCode)
+        # cursor.execute(query, rec_search)
+        cursor.execute(query)
+        for rec in cursor:
+            print(f"Product code = {rec[0]}  Product name = {rec[1]} Date = {rec[2]} price = {rec[3]}")
         search_count = 0
-        for(ProductCode, ProductName, SalesDate, SalesPrice) in cursor:
-            search_count += 1
-            print("++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            print("Product code : ", ProductCode)
-            print("Product name : ", ProductName)
-            print("Date of sale : ", SalesDate)
-            print("Sale price : ", SalesPrice)
-            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            if search_count%2 == 0:
-                input("Press any key to continue: ")
-                clrscreen()
-                print(search_count, "Record(s) found")
+        # for(ProductCode, ProductName, SalesDate, SalesPrice) in cursor:
+        #     search_count += 1
+        #     print("++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        #     print("Product code : ", ProductCode)
+        #     print("Product name : ", ProductName)
+        #     print("Date of sale : ", SalesDate)
+        #     print("Sale price : ", SalesPrice)
+        #     print("+++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        #     if search_count%2 == 0:
+        #         input("Press any key to continue: ")
+        #         clrscreen()
+        #         print(search_count, "Record(s) found")
         cxn.commit()
         cursor.close()
         cxn.close()
@@ -95,9 +101,9 @@ def searchData():
         cxn.close()
 
 
-def updateData():
+def updateItem():
     try:
-        cxn = mysql.connector.connect(user="root", password="*****", host="localhost", database="Inventory")
+        cxn = mysql.connector.connect(user=c.user, password=c.password, host=c.host, database="Inventory")
         cursor = cxn.cursor()
         ProductCode = input("Enter Product Code to be updated from the Sales : ")
         query = ("SELECT * FROM Sales WHERE ProductCode = %s")
@@ -125,3 +131,19 @@ def updateData():
         else:
             print(e)
     cxn.close()
+    
+def addNewUser():
+    while True :
+        cxn = mysql.connector.connect(user=c.user, password=c.password, host=c.host, database='Inventory')
+        cursor = cxn.cursor()
+        newusername = input("Enter new username\n")
+        
+        query = f"INSERT INTO user (username)values('{newusername}')"
+        cursor.execute(query)
+        cxn.commit()
+        print("New User has been added to the list ")
+        
+        cursor.execute("select * from user" )
+        for record in cursor :
+            print (record)
+        break

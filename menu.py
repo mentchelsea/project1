@@ -1,9 +1,10 @@
 #MENU MODULE: 
+import mysql_config
 import inventory, sales, purchase
 
 def menuPurchases():
     while True:
-        purchase.clrscreen()
+       # purchase.clrscreen()
         print("****** PURCHASE MANAGEMENT SYSTEM ******\n")
         print("++++++++++++++++++++++++++++++++++++++++++")
         print("1. Add purchase")
@@ -30,7 +31,7 @@ def menuPurchases():
            
 def menuSales():
     while True:
-        purchase.clrscrean()
+        #purchase.clrscrean()
         print("****** SALES MANAGEMENT SYSTEM ****** \n")
         print("+++++++++++++++++++++++++++++++++++++++++")
         print("1. Add sales ")
@@ -54,9 +55,10 @@ def menuSales():
         else:
             print("Wrong choice...try again")
             x = input("Press any key to continue: ")
+            
 def menuInventory():
     while True:
-        purchase.clrscrean()
+        #purchase.clrscrean()
         print("****** INVENTORY MANAGEMENT SYSTEM ****** \n")
         print("+++++++++++++++++++++++++++++++++++++++++")
         print("1. Search for inventory ")
@@ -70,4 +72,7 @@ def menuInventory():
         else:
             print("Wrong choice...try again")
             x = input("Press any key to continue: ")
+
+
+        
         
